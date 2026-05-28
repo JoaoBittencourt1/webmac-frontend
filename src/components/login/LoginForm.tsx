@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { PanelCard } from '../ui/PanelCard'
 import { useAuth } from '../../context/AuthContext'
-import './LoginForm.css'
 
 export function LoginForm() {
   const { login } = useAuth()
@@ -27,13 +27,9 @@ export function LoginForm() {
   }
 
   return (
-    <section className="login-card" aria-labelledby="login-title">
-      <h1 id="login-title" className="login-card__title">
-        ENTRAR
-      </h1>
-
-      <form className="login-card__form" onSubmit={handleSubmit} noValidate>
-        <label className="login-card__field">
+    <PanelCard title="ENTRAR" titleId="login-title">
+      <form className="panel-card__form" onSubmit={handleSubmit} noValidate>
+        <label className="panel-card__field">
           <span className="visually-hidden">CPF ou CNPJ</span>
           <input
             type="text"
@@ -46,7 +42,7 @@ export function LoginForm() {
           />
         </label>
 
-        <label className="login-card__field">
+        <label className="panel-card__field">
           <span className="visually-hidden">Senha</span>
           <input
             type="password"
@@ -60,27 +56,25 @@ export function LoginForm() {
         </label>
 
         {error && (
-          <p className="login-card__error" role="alert">
+          <p className="panel-card__error" role="alert">
             {error}
           </p>
         )}
 
-        <button type="submit" className="login-card__submit" disabled={loading}>
+        <button type="submit" className="panel-card__submit" disabled={loading}>
           {loading ? 'ENTRANDO…' : 'ENTRAR'}
         </button>
       </form>
 
-      <div className="login-card__links">
-        <Link to="/esqueci-senha" className="login-card__link">
+      <div className="panel-card__links">
+        <Link to="/esqueci-senha" className="panel-card__link">
           Esqueceu a senha?
         </Link>
-        <p className="login-card__signup">
-          Não tem conta?{' '}
-          <Link to="/cadastro" className="login-card__link">
-            Cadastre-se
-          </Link>
-        </p>
+        <p className="panel-card__text">Não tem conta?</p>
+        <Link to="/cadastro" className="panel-card__link">
+          Cadastre-se
+        </Link>
       </div>
-    </section>
+    </PanelCard>
   )
 }

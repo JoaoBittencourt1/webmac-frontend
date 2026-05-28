@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2.5rem;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid #c8c8c8;
   font-size: 0.9rem;
 }
 

@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
-import '../components/login/LoginForm.css'
+import { PanelCard } from '../components/ui/PanelCard'
 
 export function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
@@ -12,18 +12,14 @@ export function ForgotPasswordPage() {
   }
 
   return (
-    <section className="login-card" aria-labelledby="forgot-title">
-      <h1 id="forgot-title" className="login-card__title">
-        RECUPERAR SENHA
-      </h1>
-
+    <PanelCard title="RECUPERAR SENHA" titleId="forgot-title">
       {sent ? (
-        <p className="login-card__signup" style={{ marginTop: 0 }}>
+        <p className="panel-card__text">
           Se existir uma conta com esses dados, você receberá instruções por e-mail.
         </p>
       ) : (
-        <form className="login-card__form" onSubmit={handleSubmit}>
-          <label className="login-card__field">
+        <form className="panel-card__form" onSubmit={handleSubmit}>
+          <label className="panel-card__field">
             <span className="visually-hidden">CPF, CNPJ ou e-mail</span>
             <input
               type="text"
@@ -33,17 +29,17 @@ export function ForgotPasswordPage() {
               required
             />
           </label>
-          <button type="submit" className="login-card__submit">
+          <button type="submit" className="panel-card__submit">
             ENVIAR LINK
           </button>
         </form>
       )}
 
-      <div className="login-card__links">
-        <Link to="/entrar" className="login-card__link">
+      <div className="panel-card__links">
+        <Link to="/entrar" className="panel-card__link">
           Voltar para entrar
         </Link>
       </div>
-    </section>
+    </PanelCard>
   )
 }

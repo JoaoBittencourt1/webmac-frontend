@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import '../components/login/LoginForm.css'
+import { PanelCard } from '../components/ui/PanelCard'
 
 export function SignUpPage() {
   const navigate = useNavigate()
@@ -15,13 +15,9 @@ export function SignUpPage() {
   }
 
   return (
-    <section className="login-card" aria-labelledby="signup-title">
-      <h1 id="signup-title" className="login-card__title">
-        CADASTRE-SE
-      </h1>
-
-      <form className="login-card__form" onSubmit={handleSubmit}>
-        <label className="login-card__field">
+    <PanelCard title="CADASTRE-SE" titleId="signup-title">
+      <form className="panel-card__form" onSubmit={handleSubmit}>
+        <label className="panel-card__field">
           <span className="visually-hidden">CPF ou CNPJ</span>
           <input
             type="text"
@@ -31,7 +27,7 @@ export function SignUpPage() {
             required
           />
         </label>
-        <label className="login-card__field">
+        <label className="panel-card__field">
           <span className="visually-hidden">Senha</span>
           <input
             type="password"
@@ -42,7 +38,7 @@ export function SignUpPage() {
             minLength={6}
           />
         </label>
-        <label className="login-card__field">
+        <label className="panel-card__field">
           <span className="visually-hidden">Confirmar senha</span>
           <input
             type="password"
@@ -54,27 +50,25 @@ export function SignUpPage() {
           />
         </label>
         {password && confirmPassword && password !== confirmPassword && (
-          <p className="login-card__error" role="alert">
+          <p className="panel-card__error" role="alert">
             As senhas não coincidem.
           </p>
         )}
         <button
           type="submit"
-          className="login-card__submit"
+          className="panel-card__submit"
           disabled={!password || password !== confirmPassword}
         >
           CRIAR CONTA
         </button>
       </form>
 
-      <div className="login-card__links">
-        <p className="login-card__signup">
-          Já tem conta?{' '}
-          <Link to="/entrar" className="login-card__link">
-            Entrar
-          </Link>
-        </p>
+      <div className="panel-card__links">
+        <p className="panel-card__text">Já tem conta?</p>
+        <Link to="/entrar" className="panel-card__link">
+          Entrar
+        </Link>
       </div>
-    </section>
+    </PanelCard>
   )
 }

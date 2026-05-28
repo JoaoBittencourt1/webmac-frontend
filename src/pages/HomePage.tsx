@@ -1,18 +1,40 @@
+import { Link, useNavigate } from 'react-router-dom'
+import { PanelCard } from '../components/ui/PanelCard'
 import { useAuth } from '../context/AuthContext'
-import './HomePage.css'
+import { formatDocument } from '../utils/formatDocument'
+
+const menuItems = [
+  { label: 'MEUS PEDIDOS', to: '/pedidos' },
+  { label: 'ORÇAMENTOS', to: '/orcamentos' },
+  { label: 'MEU CADASTRO', to: '/perfil' },
+] as const
 
 export function HomePage() {
   const { user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    logout()
+    navigate('/entrar', { replace: true })
+  }
 
   return (
-    <section className="home-panel">
-      <h1 className="home-panel__title">Bem-vindo à WebMec</h1>
-      <p className="home-panel__text">
-        Você está autenticado como <strong>{user?.document}</strong>.
+    <PanelCard title="PAINEL" titleId="home-title">
+      <p className="panel-card__greeting">
+        Olá, <strong>{formatDocument(user?.document)}</strong>
       </p>
-      <button type="button" className="home-panel__logout" onClick={logout}>
+
+      <nav className="panel-card__menu" aria-label="Menu principal">
+        {menuItems.map(({ label, to }) => (
+          <Link key={to} to={to} className="panel-card__menu-item">
+            {label}
+          </Link>
+        ))}
+      </nav>
+
+      <button type="button" className="panel-card__submit" onClick={handleLogout}>
         SAIR
       </button>
-    </section>
+    </PanelCard>
   )
 }

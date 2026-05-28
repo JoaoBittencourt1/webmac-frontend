@@ -30,6 +30,30 @@ export default function App() {
               path="parceiro"
               element={<PlaceholderPage title="SEJA UM PARCEIRO" />}
             />
+            <Route
+              path="pedidos"
+              element={
+                <ProtectedRoute>
+                  <PlaceholderPage title="MEUS PEDIDOS" />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orcamentos"
+              element={
+                <ProtectedRoute>
+                  <PlaceholderPage title="ORÇAMENTOS" />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="perfil"
+              element={
+                <ProtectedRoute>
+                  <PlaceholderPage title="MEU CADASTRO" />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

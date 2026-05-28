@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import '../components/login/LoginForm.css'
+import { PanelCard } from '../components/ui/PanelCard'
 
 interface PlaceholderPageProps {
   title: string
@@ -7,14 +7,13 @@ interface PlaceholderPageProps {
 
 export function PlaceholderPage({ title }: PlaceholderPageProps) {
   return (
-    <section className="login-card">
-      <h1 className="login-card__title">{title}</h1>
-      <p className="login-card__signup">Conteúdo em breve.</p>
-      <div className="login-card__links">
-        <Link to="/" className="login-card__link">
-          Voltar ao início
+    <PanelCard title={title}>
+      <p className="panel-card__text">Conteúdo em breve.</p>
+      <div className="panel-card__links">
+        <Link to="/" className="panel-card__link">
+          Voltar ao painel
         </Link>
       </div>
-    </section>
+    </PanelCard>
   )
 }

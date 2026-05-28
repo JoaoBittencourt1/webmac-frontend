@@ -1,23 +1,30 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.svg'
+import { useAuth } from '../../context/AuthContext'
 import './Header.css'
 
-const navLinks = [
+const publicNavLinks = [
   { label: 'SAQ', to: '/saq' },
   { label: 'SEJA UM PARCEIRO', to: '/parceiro' },
-  { label: 'ENTRAR', to: '/entrar' },
 ] as const
 
 export function Header() {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const { user, logout } = useAuth()
+
+  function handleLogout() {
+    logout()
+    navigate('/entrar', { replace: true })
+  }
 
   return (
     <header className="header">
-      <Link to="/" className="header__logo" aria-label="WebMec — início">
-        <img src={logo} alt="" width={48} height={48} />
+      <Link to={user ? '/' : '/entrar'} className="header__logo" aria-label="WebMec — início">
+        <img src={logo} alt="WebMec" width={52} height={52} />
       </Link>
       <nav className="header__nav" aria-label="Principal">
-        {navLinks.map(({ label, to }) => (
+        {publicNavLinks.map(({ label, to }) => (
           <Link
             key={to}
             to={to}
@@ -26,6 +33,18 @@ export function Header() {
             {label}
           </Link>
         ))}
+        {user ? (
+          <button type="button" className="header__link header__logout" onClick={handleLogout}>
+            SAIR
+          </button>
+        ) : (
+          <Link
+            to="/entrar"
+            className={`header__link${pathname === '/entrar' ? ' header__link--active' : ''}`}
+          >
+            ENTRAR
+          </Link>
+        )}
       </nav>
     </header>
   )

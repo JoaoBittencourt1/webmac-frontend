@@ -40,7 +40,10 @@ npm run lint
 | `/entrar` | Login (CPF/CNPJ e senha) | Público |
 | `/cadastro` | Criação de conta | Público |
 | `/esqueci-senha` | Recuperação de senha | Público |
-| `/` | Área inicial após login | Autenticado |
+| `/` | Painel pós-login (menu + sair) | Autenticado |
+| `/pedidos` | Meus pedidos | Autenticado |
+| `/orcamentos` | Orçamentos | Autenticado |
+| `/perfil` | Meu cadastro | Autenticado |
 | `/saq` | Perguntas frequentes | Público (placeholder) |
 | `/parceiro` | Seja um parceiro | Público (placeholder) |
 

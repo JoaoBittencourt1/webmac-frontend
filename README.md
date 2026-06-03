@@ -49,15 +49,18 @@ npm run lint
 
 Usuários não autenticados que acessam `/` são redirecionados para `/entrar`.
 
-## Autenticação (desenvolvimento)
+## Autenticação
 
-A autenticação atual é **simulada** para desenvolvimento local:
+A autenticação usa a API do backend (`webmec-backend`):
 
-- Qualquer CPF/CNPJ e senha não vazios permitem o login.
-- A sessão é persistida em `localStorage` (chave `webmac-auth`).
-- O botão **SAIR** na home remove a sessão.
+- Login e cadastro por CPF/CNPJ + senha (`POST /api/auth/login`, `POST /api/auth/register`).
+- Sessão JWT em `localStorage` (chave `webmac-auth`).
+- Em desenvolvimento, o Vite faz proxy de `/api` para `http://localhost:3000`.
 
-A integração com a API real deve substituir a lógica em `src/context/AuthContext.tsx`.
+**Credenciais de teste** (após `npm run db:seed` no backend, senha `123456`):
+
+- Carlos: `12345678901` ou `123.456.789-01`
+- Ana: `23456789012` ou `234.567.890-12`
 
 ## Estrutura do projeto
 
@@ -77,10 +80,12 @@ src/
 
 ## Variáveis de ambiente
 
-Nenhuma variável é obrigatória no momento. Quando a API estiver disponível, crie um arquivo `.env.local` na raiz do projeto, por exemplo:
+Em desenvolvimento não é obrigatório configurar nada (proxy no `vite.config.ts`).
+
+Para produção, crie `.env.local`:
 
 ```env
-VITE_API_URL=https://api.exemplo.com
+VITE_API_URL=https://api.seudominio.com/api
 ```
 
 Variáveis expostas ao cliente devem usar o prefixo `VITE_`. Não commite arquivos `.env` com credenciais.
@@ -96,7 +101,7 @@ Variáveis expostas ao cliente devem usar o prefixo `VITE_`. Não commite arquiv
 
 ## Próximos passos
 
-- [ ] Integrar API de autenticação
+- [x] Integrar API de autenticação
 - [ ] Validar CPF/CNPJ no formulário
 - [ ] Implementar páginas SAQ e Parceiro
 - [ ] Substituir logo placeholder pelo asset oficial

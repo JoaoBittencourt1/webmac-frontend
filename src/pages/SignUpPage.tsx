@@ -1,17 +1,36 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { PanelCard } from '../components/ui/PanelCard'
+import { register } from '../api/auth'
+import { ApiError } from '../api/http'
 
 export function SignUpPage() {
   const navigate = useNavigate()
   const [document, setDocument] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     if (password !== confirmPassword) return
-    navigate('/entrar', { replace: true })
+
+    setError(null)
+    setLoading(true)
+
+    try {
+      await register(document.trim(), password)
+      navigate('/entrar', { replace: true })
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.message)
+      } else {
+        setError('Não foi possível conectar ao servidor.')
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -25,6 +44,7 @@ export function SignUpPage() {
             value={document}
             onChange={(e) => setDocument(e.target.value)}
             required
+            disabled={loading}
           />
         </label>
         <label className="panel-card__field">
@@ -36,6 +56,7 @@ export function SignUpPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
+            disabled={loading}
           />
         </label>
         <label className="panel-card__field">
@@ -47,6 +68,7 @@ export function SignUpPage() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
             minLength={6}
+            disabled={loading}
           />
         </label>
         {password && confirmPassword && password !== confirmPassword && (
@@ -54,12 +76,17 @@ export function SignUpPage() {
             As senhas não coincidem.
           </p>
         )}
+        {error && (
+          <p className="panel-card__error" role="alert">
+            {error}
+          </p>
+        )}
         <button
           type="submit"
           className="panel-card__submit"
-          disabled={!password || password !== confirmPassword}
+          disabled={loading || !password || password !== confirmPassword}
         >
-          CRIAR CONTA
+          {loading ? 'CRIANDO…' : 'CRIAR CONTA'}
         </button>
       </form>
 

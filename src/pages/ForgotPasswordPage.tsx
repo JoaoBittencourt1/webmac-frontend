@@ -1,14 +1,32 @@
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { PanelCard } from '../components/ui/PanelCard'
+import { forgotPassword } from '../api/auth'
+import { ApiError } from '../api/http'
 
 export function ForgotPasswordPage() {
-  const [email, setEmail] = useState('')
+  const [identifier, setIdentifier] = useState('')
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    setSent(true)
+    setError(null)
+    setLoading(true)
+
+    try {
+      await forgotPassword(identifier.trim())
+      setSent(true)
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.message)
+      } else {
+        setError('Não foi possível conectar ao servidor.')
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -24,13 +42,23 @@ export function ForgotPasswordPage() {
             <input
               type="text"
               placeholder="CPF, CNPJ ou e-mail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
               required
+              disabled={loading}
             />
           </label>
-          <button type="submit" className="panel-card__submit">
-            ENVIAR LINK
+          {error && (
+            <p className="panel-card__error" role="alert">
+              {error}
+            </p>
+          )}
+          <button
+            type="submit"
+            className="panel-card__submit"
+            disabled={loading}
+          >
+            {loading ? 'ENVIANDO…' : 'ENVIAR LINK'}
           </button>
         </form>
       )}

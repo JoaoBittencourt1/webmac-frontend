@@ -1,0 +1,37 @@
+.home-search {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.home-mecanicos-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.home-mecanico-card {
+  background: rgba(255, 255, 255, 0.35);
+  padding: 0.75rem;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.home-mecanico-card p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.home-mecanico-card__endereco {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.home-mecanico-card__fav {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+}

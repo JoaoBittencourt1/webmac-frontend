@@ -1,0 +1,85 @@
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.profile-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.profile-photo--placeholder {
+  border: 2px dashed rgba(0, 0, 0, 0.2);
+}
+
+.profile-photo-upload {
+  cursor: pointer;
+}
+
+.profile-section {
+  width: 100%;
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.profile-section__title {
+  font-size: 1rem;
+  font-style: italic;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+}
+
+.profile-favoritos,
+.profile-agenda {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.profile-favorito,
+.profile-agenda-item {
+  background: rgba(255, 255, 255, 0.35);
+  padding: 0.75rem;
+  border-radius: 4px;
+}
+
+.profile-favorito p,
+.profile-agenda-item p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.profile-agenda-item__date {
+  font-style: italic;
+  font-size: 0.85rem !important;
+}
+
+.profile-agenda-form {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.profile-email {
+  margin-top: 1rem;
+  opacity: 0.7;
+}
+
+.panel-card__field textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: inherit;
+  resize: vertical;
+}

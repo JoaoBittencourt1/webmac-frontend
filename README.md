@@ -31,6 +31,8 @@ Interface web da **WebMec**, construída com React, TypeScript e Vite. O projeto
 # Instalar dependências
 npm install
 
+cp .env.example .env
+
 # Servidor de desenvolvimento (http://localhost:5173)
 npm run dev
 

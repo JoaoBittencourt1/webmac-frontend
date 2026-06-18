@@ -1,3 +1,14 @@
+# integrantes:
+
+Celso Teixeira de Oliveira Júnior  UC25101390
+
+Lara Rodrigues Holanda Leal UC25104130
+
+Paulo José Higa Freitas UC24101911
+
+Joao Vitor Alves Bittencourt UC24100506
+
+
 # WebMec Frontend
 
 Interface web da **WebMec**, construída com React, TypeScript e Vite. O projeto inclui o fluxo inicial de autenticação (login, cadastro e recuperação de senha) e o layout base (header, footer e área logada).

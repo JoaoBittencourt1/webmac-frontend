@@ -1,0 +1,19 @@
+.termos-content {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.termos-content h2 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: 0.35rem;
+}
+
+.termos-content p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,133 @@
+.criar-pedido__steps {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.criar-pedido__step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.criar-pedido__step--active {
+  opacity: 1;
+}
+
+.criar-pedido__step--done {
+  opacity: 0.7;
+}
+
+.criar-pedido__step:disabled {
+  cursor: default;
+}
+
+.criar-pedido__step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-border);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.criar-pedido__step--active .criar-pedido__step-num {
+  background: var(--color-primary);
+}
+
+.criar-pedido__step--done .criar-pedido__step-num {
+  background: #2e7d32;
+}
+
+.criar-pedido__step-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.criar-pedido__step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.criar-pedido__selected-info {
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: left;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+}
+
+.criar-pedido__mecanicos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.criar-pedido__mecanico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  padding: 0.75rem;
+  text-align: left;
+  gap: 0.5rem;
+}
+
+.criar-pedido__esp {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+.criar-pedido__end {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.criar-pedido__selected {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  padding: 0.75rem;
+}
+
+.panel-card__field textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--color-text);
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  outline: none;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.panel-card__field textarea::placeholder {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.panel-card__field textarea:focus {
+  box-shadow: 0 0 0 2px var(--color-primary);
+}

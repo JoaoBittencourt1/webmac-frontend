@@ -8,11 +8,15 @@ import './HomePage.css'
 
 const clientMenuItems = [
   { label: 'MEUS PEDIDOS', to: '/pedidos' },
-  { label: 'ORÇAMENTOS', to: '/orcamentos' },
+  { label: 'NOVO PEDIDO', to: '/pedidos/novo' },
   { label: 'MEU CADASTRO', to: '/perfil' },
 ] as const
 
-const mechanicMenuItems = [{ label: 'MEU PERFIL', to: '/perfil' }] as const
+const mechanicMenuItems = [
+  { label: 'PEDIDOS RECEBIDOS', to: '/pedidos' },
+  { label: 'TAREFAS SEMANAIS', to: '/tarefas' },
+  { label: 'MEU PERFIL', to: '/perfil' },
+] as const
 
 export function HomePage() {
   const { user, logout } = useAuth()
@@ -108,16 +112,28 @@ export function HomePage() {
             <ul className="home-mecanicos-list">
               {mecanicos.map((m) => (
                 <li key={m.id} className="home-mecanico-card">
-                  <strong>{m.nome}</strong>
+                  <Link to={`/mecanico/${m.id}`} className="home-mecanico-card__link">
+                    <strong>{m.nome}</strong>
+                    <p className="home-mecanico-card__esp">{m.especialidade}</p>
+                  </Link>
                   <p>{m.descricao}</p>
                   <p className="home-mecanico-card__endereco">{m.endereco}</p>
-                  <button
-                    type="button"
-                    className="panel-card__submit home-mecanico-card__fav"
-                    onClick={() => toggleFavorito(m.id, m.isFavorito)}
-                  >
-                    {m.isFavorito ? 'DESFAVORITAR' : 'FAVORITAR'}
-                  </button>
+                  <div className="home-mecanico-card__actions">
+                    <button
+                      type="button"
+                      className="panel-card__submit home-mecanico-card__fav"
+                      onClick={() => toggleFavorito(m.id, m.isFavorito)}
+                    >
+                      {m.isFavorito ? 'DESFAVORITAR' : 'FAVORITAR'}
+                    </button>
+                    <Link
+                      to={`/pedidos/novo?mecanicoId=${m.id}`}
+                      className="panel-card__submit home-mecanico-card__fav"
+                      style={{ textDecoration: 'none', textAlign: 'center' }}
+                    >
+                      SOLICITAR
+                    </Link>
+                  </div>
                 </li>
               ))}
             </ul>

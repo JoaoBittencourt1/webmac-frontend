@@ -7,17 +7,25 @@
   list-style: none;
   padding: 0;
   margin: 1rem 0 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 0.75rem;
   width: 100%;
 }
 
+@media (min-width: 600px) {
+  .home-mecanicos-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .home-mecanico-card {
-  background: rgba(255, 255, 255, 0.35);
+  background: #ffffff;
   padding: 0.75rem;
-  border-radius: 4px;
+  border: 1px solid var(--color-border);
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .home-mecanico-card p {
@@ -27,11 +35,33 @@
 
 .home-mecanico-card__endereco {
   font-style: italic;
-  opacity: 0.85;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.home-mecanico-card__link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-mecanico-card__link:hover strong {
+  color: var(--color-primary);
+}
+
+.home-mecanico-card__esp {
+  font-style: italic;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+}
+
+.home-mecanico-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .home-mecanico-card__fav {
-  margin-top: 0.5rem;
   font-size: 0.85rem;
   padding: 0.4rem 0.75rem;
+  flex: 1;
 }

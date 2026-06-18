@@ -1,0 +1,93 @@
+.tarefas-form {
+  margin-bottom: 1.5rem;
+}
+
+.tarefas-semana {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.tarefas-dia__title {
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.25rem;
+}
+
+.tarefas-dia__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tarefa-item {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.tarefa-item--done {
+  opacity: 0.6;
+}
+
+.tarefa-item--done .tarefa-item__titulo {
+  text-decoration: line-through;
+}
+
+.tarefa-item__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.tarefa-item__check {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.tarefa-item__titulo {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.tarefa-item__prioridade {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.tarefa-item__descricao {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+.panel-card__field select {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--color-text);
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  outline: none;
+  font-family: inherit;
+}
+
+.panel-card__field select:focus {
+  box-shadow: 0 0 0 2px var(--color-primary);
+}

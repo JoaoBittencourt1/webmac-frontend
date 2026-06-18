@@ -1,0 +1,50 @@
+.signup-tipos-servico {
+  border: 1px solid var(--color-border);
+  padding: 0.75rem;
+  margin: 0;
+}
+
+.signup-tipos-servico__legend {
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--color-text-muted);
+  padding: 0 0.25rem;
+}
+
+.signup-tipos-servico__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.signup-tipo-check {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.signup-tipo-check input {
+  width: auto;
+  margin: 0;
+}
+
+.signup-termos {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: left;
+  cursor: pointer;
+}
+
+.signup-termos input {
+  width: auto;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}

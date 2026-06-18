@@ -3,6 +3,20 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { PanelCard } from '../components/ui/PanelCard'
 import { useAuth } from '../context/AuthContext'
 import { registerSchema } from '../lib/schemas'
+import './SignUpPage.css'
+
+const tiposServicoOptions = [
+  'Troca de óleo',
+  'Revisão completa',
+  'Freios',
+  'Suspensão',
+  'Motor',
+  'Elétrica',
+  'Ar condicionado',
+  'Funilaria e pintura',
+  'Alinhamento e balanceamento',
+  'Diagnóstico',
+]
 
 export function SignUpPage() {
   const { register } = useAuth()
@@ -18,13 +32,29 @@ export function SignUpPage() {
   const [endereco, setEndereco] = useState('')
   const [cpf, setCpf] = useState('')
   const [cnpj, setCnpj] = useState('')
+  const [whatsapp, setWhatsapp] = useState('')
+  const [cep, setCep] = useState('')
   const [descricao, setDescricao] = useState('')
+  const [tiposServico, setTiposServico] = useState<string[]>([])
+  const [horarioFuncionamento, setHorarioFuncionamento] = useState('')
+  const [aceitouTermos, setAceitouTermos] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+
+  function toggleTipoServico(tipo: string) {
+    setTiposServico((prev) =>
+      prev.includes(tipo) ? prev.filter((t) => t !== tipo) : [...prev, tipo],
+    )
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     setError(null)
+
+    if (!aceitouTermos) {
+      setError('Você precisa aceitar os termos de uso.')
+      return
+    }
 
     if (password !== confirmPassword) {
       setError('As senhas não coincidem.')
@@ -39,8 +69,12 @@ export function SignUpPage() {
           password,
           cnpj,
           telefone,
+          whatsapp: whatsapp || undefined,
           endereco,
+          cep: cep || undefined,
           descricao,
+          tiposServico: tiposServico.length > 0 ? tiposServico : undefined,
+          horarioFuncionamento: horarioFuncionamento || undefined,
         }
       : {
           role: 'CLIENTE' as const,
@@ -73,15 +107,15 @@ export function SignUpPage() {
 
   return (
     <PanelCard
-      title={isMechanic ? 'CADASTRO MECÂNICO' : 'CADASTRE-SE'}
+      title={isMechanic ? 'CADASTRO OFICINA' : 'CADASTRE-SE'}
       titleId="signup-title"
     >
       <form className="panel-card__form" onSubmit={handleSubmit}>
         <label className="panel-card__field">
-          <span className="visually-hidden">Nome</span>
+          <span className="visually-hidden">Nome{isMechanic ? ' da oficina' : ''}</span>
           <input
             type="text"
-            placeholder="NOME"
+            placeholder={isMechanic ? 'NOME DA OFICINA' : 'NOME'}
             value={nome}
             onChange={(e) => setNome(e.target.value)}
             required
@@ -139,6 +173,19 @@ export function SignUpPage() {
           />
         </label>
 
+        {isMechanic && (
+          <label className="panel-card__field">
+            <span className="visually-hidden">WhatsApp</span>
+            <input
+              type="text"
+              placeholder="WHATSAPP (opcional)"
+              value={whatsapp}
+              onChange={(e) => setWhatsapp(e.target.value)}
+              disabled={loading}
+            />
+          </label>
+        )}
+
         <label className="panel-card__field">
           <span className="visually-hidden">Endereço</span>
           <input
@@ -153,16 +200,59 @@ export function SignUpPage() {
 
         {isMechanic && (
           <label className="panel-card__field">
-            <span className="visually-hidden">Descrição</span>
-            <textarea
-              placeholder="DESCRIÇÃO DO SERVIÇO"
-              value={descricao}
-              onChange={(e) => setDescricao(e.target.value)}
-              required
+            <span className="visually-hidden">CEP</span>
+            <input
+              type="text"
+              placeholder="CEP"
+              value={cep}
+              onChange={(e) => setCep(e.target.value)}
               disabled={loading}
-              rows={3}
             />
           </label>
+        )}
+
+        {isMechanic && (
+          <>
+            <label className="panel-card__field">
+              <span className="visually-hidden">Descrição</span>
+              <textarea
+                placeholder="DESCRIÇÃO DA OFICINA"
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
+                required
+                disabled={loading}
+                rows={3}
+              />
+            </label>
+
+            <fieldset className="signup-tipos-servico">
+              <legend className="signup-tipos-servico__legend">TIPOS DE SERVIÇO</legend>
+              <div className="signup-tipos-servico__grid">
+                {tiposServicoOptions.map((tipo) => (
+                  <label key={tipo} className="signup-tipo-check">
+                    <input
+                      type="checkbox"
+                      checked={tiposServico.includes(tipo)}
+                      onChange={() => toggleTipoServico(tipo)}
+                      disabled={loading}
+                    />
+                    <span>{tipo}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            <label className="panel-card__field">
+              <span className="visually-hidden">Horário de funcionamento</span>
+              <input
+                type="text"
+                placeholder="HORÁRIO DE FUNCIONAMENTO (ex: Seg-Sex 8h-18h)"
+                value={horarioFuncionamento}
+                onChange={(e) => setHorarioFuncionamento(e.target.value)}
+                disabled={loading}
+              />
+            </label>
+          </>
         )}
 
         <label className="panel-card__field">
@@ -189,6 +279,21 @@ export function SignUpPage() {
             minLength={6}
             disabled={loading}
           />
+        </label>
+
+        <label className="signup-termos">
+          <input
+            type="checkbox"
+            checked={aceitouTermos}
+            onChange={(e) => setAceitouTermos(e.target.checked)}
+            disabled={loading}
+          />
+          <span>
+            Li e aceito os{' '}
+            <Link to="/termos" className="panel-card__link" target="_blank">
+              termos de uso
+            </Link>
+          </span>
         </label>
 
         {error && (
